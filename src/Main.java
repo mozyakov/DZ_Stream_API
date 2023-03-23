@@ -20,19 +20,23 @@ public class Main {
         }
         System.out.println("=========");
 
+        /*List<Person> peoplesForWork = persons.stream()
+                .filter((sex) -> sex.getSex().equals(Sex.MAN))*/
 
-
-        List<Person> manForWar = persons.stream() //2 стрим подсчет призывников
-                        .filter((age) -> (age.getAge() >= 18) & (age.getAge() < 50))
+        List<String> manWarriors = persons.stream() //2 стрим подсчет призывников
+                        .filter((age) -> (age.getAge() >= 18) & (age.getAge() < 27))
                         .filter((sex) -> sex.getSex().equals(Sex.MAN))
+                        .map(Person -> Person.getFamily())
                         .collect(Collectors.toList());
-        System.out.println(manForWar);
+        System.out.println(manWarriors);
+
         System.out.println("=========");
-        long countAgeLess18 = persons.stream() //1 стрим подсчет несовершеннолетних
+
+        /*long countAgeLess18 = persons.stream() //1 стрим подсчет несовершеннолетних
                 .filter((age) -> age.getAge() < 18)
                 .count();
-        System.out.println(countAgeLess18);  //кол-во несовершеннолетних
-        System.out.println("=========");
+        System.out.println("кол-во несовершеннолетних " + countAgeLess18);  //кол-во несовершеннолетних*/
+
 
 
 
