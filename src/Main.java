@@ -20,15 +20,18 @@ public class Main {
         }
         System.out.println("=========");
 
-        /*List<Person> peoplesForWork = persons.stream()
-                .filter((sex) -> sex.getSex().equals(Sex.MAN))*/
+        List<Person> peoplesForWork = persons.stream()
+                .filter((personEd) -> personEd.getEducation().equals(Education.HIGHER))
+                //filter sex, age
+                .collect(Collectors.toList());
+        System.out.println(peoplesForWork);
 
-        List<String> manWarriors = persons.stream() //2 стрим подсчет призывников
+        /*List<String> manWarriors = persons.stream() //2 стрим подсчет призывников
                         .filter((age) -> (age.getAge() >= 18) & (age.getAge() < 27))
                         .filter((sex) -> sex.getSex().equals(Sex.MAN))
                         .map(Person -> Person.getFamily())
                         .collect(Collectors.toList());
-        System.out.println(manWarriors);
+        System.out.println(manWarriors); */
 
         System.out.println("=========");
 
