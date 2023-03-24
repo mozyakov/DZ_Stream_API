@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.function.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 public class Main {
@@ -21,10 +22,29 @@ public class Main {
         System.out.println("=========");
 
         List<Person> peoplesForWork = persons.stream()
-                .filter((personEd) -> personEd.getEducation().equals(Education.HIGHER))
-                //filter sex, age
+                .filter((education) -> education.getEducation() == Education.HIGHER)
+                .filter((sex) -> sex.getSex() == Sex.MAN)
+                .filter((age) -> (age.getAge() >= 18) & (age.getAge() < 65))
+                //.filter((age) -> (age.getAge() >= 18) & (age.getAge() < 65))
+                //.filter((sex, age) -> sex.getSex().equals(Sex.MAN) & (age.getAge() >= 18) & (age.getAge() < 60))
+                //.filter((age) -> (age.getAge() >= 18) & (age.getAge() < 60))
                 .collect(Collectors.toList());
         System.out.println(peoplesForWork);
+
+        /*for (Person person : persons) { // цикл со всеми условиями фильтра
+            if(person.getEducation() == Education.HIGHER & person.getSex() == Sex.MAN & (person.getAge() >= 18 & (person.getAge() < 66)))
+            //System.out.println(person);
+                return;
+         else if(person.getEducation() == Education.HIGHER & person.getSex() == Sex.WOMAN & (person.getAge() >= 18 & (person.getAge() < 60)))
+        //System.out.println(person);
+             return;
+        }*/
+        /*for (Person person : persons) { //
+            if(person.getSex().equals(Sex.MAN) & (person.getAge() >= 18 & (person.getAge() < 65)))
+            System.out.println(person);
+         else if(person.getSex().equals(Sex.WOMAN) & (person.getAge() >= 18 & (person.getAge() < 60)))
+        System.out.println(person);
+        }*/
 
         /*List<String> manWarriors = persons.stream() //2 стрим подсчет призывников
                         .filter((age) -> (age.getAge() >= 18) & (age.getAge() < 27))
@@ -33,16 +53,11 @@ public class Main {
                         .collect(Collectors.toList());
         System.out.println(manWarriors); */
 
-        System.out.println("=========");
+        //System.out.println("=========");
 
         /*long countAgeLess18 = persons.stream() //1 стрим подсчет несовершеннолетних
                 .filter((age) -> age.getAge() < 18)
                 .count();
         System.out.println("кол-во несовершеннолетних " + countAgeLess18);  //кол-во несовершеннолетних*/
-
-
-
-
-
     }
 }
