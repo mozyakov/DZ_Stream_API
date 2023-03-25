@@ -40,15 +40,16 @@ public class Main {
 
         System.out.println(peoplesForWork);
 
-        System.out.println("=========");
+        System.out.println("========="); //для удобства чтения
+
         List<String> manForWar = persons.stream() //2 стрим подсчет призывников
-                        .filter(person -> (person.getAge() >= 18) & (person.getAge() < 27))
+                        .filter(person -> (person.getAge() >= 18) && (person.getAge() < 27))
                         .filter(person -> person.getSex() == Sex.MAN)
                         .map(person -> person.getFamily())
                         .collect(Collectors.toList());
         System.out.println("Список фамилий призывников " + manForWar);
 
-        System.out.println("=========");
+        System.out.println("========="); //для удобства чтения
 
         long ageLess18 = persons.stream() //1 стрим подсчет несовершеннолетних
                 .filter(person -> person.getAge() < 18)
