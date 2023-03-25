@@ -44,11 +44,5 @@ public class Main {
                 .collect(Collectors.toList());
         System.out.println(peoplesForWork);
         System.out.println("========="); //для удобства чтения
-
-
-
-
-
-
     }
 }
