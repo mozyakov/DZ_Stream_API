@@ -1,9 +1,5 @@
 import java.util.*;
-import java.util.function.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
-import java.util.Arrays.*;
-import java.util.Comparator;
 public class Main {
     public static void main(String[] args) {
         List<String> names = Arrays.asList("Jack", "Connor", "Harry", "George", "Samuel", "John");
@@ -18,11 +14,22 @@ public class Main {
                     Education.values()[new Random().nextInt(Education.values().length)])
             );
         }
-        /*for (Person person : persons) { //пример чтоб вывести список
-            System.out.println(person);
-        }
-        System.out.println("=========");*/
-        List<Person> peoplesForWork = persons.stream()
+
+        long ageLess18 = persons.stream()   //первый стрим подсчет несовершеннолетних
+                .filter(person -> person.getAge() < 18)
+                .count();
+        System.out.println("Кол-во несовершеннолетних " + ageLess18);  //кол-во несовершеннолетних
+        System.out.println("========="); //для удобства чтения
+
+        List<String> manForWar = persons.stream()   //второй стрим список фамилий призывников
+                .filter(person -> (person.getAge() >= 18) && (person.getAge() < 27))
+                .filter(person -> person.getSex() == Sex.MAN)
+                .map(person -> person.getFamily())
+                .collect(Collectors.toList());
+        System.out.println("Список фамилий призывников " + manForWar);
+        System.out.println("========="); //для удобства чтения
+
+        List<Person> peoplesForWork = persons.stream()   //третий стрим способные к работе отсортированный по фамилиям
                 .filter(person -> person.getEducation() == Education.HIGHER)
                 .filter(person -> (person.getAge() >= 18))
                 .filter (person -> {
@@ -33,28 +40,14 @@ public class Main {
                     }
                     return false;
                 })
-                //.sorted(person (p1, p2) -> p1.person.getFamily() - p2.person.getFamily());
-                //.sorted(Comporator.comparing(Person::getFamily))
-                //.sorted(PersonComparator.naturalOrder())
+                .sorted(Comparator.comparing(Person::getFamily))
                 .collect(Collectors.toList());
-
         System.out.println(peoplesForWork);
-
         System.out.println("========="); //для удобства чтения
 
-        List<String> manForWar = persons.stream() //2 стрим подсчет призывников
-                        .filter(person -> (person.getAge() >= 18) && (person.getAge() < 27))
-                        .filter(person -> person.getSex() == Sex.MAN)
-                        .map(person -> person.getFamily())
-                        .collect(Collectors.toList());
-        System.out.println("Список фамилий призывников " + manForWar);
 
-        System.out.println("========="); //для удобства чтения
 
-        long ageLess18 = persons.stream() //1 стрим подсчет несовершеннолетних
-                .filter(person -> person.getAge() < 18)
-                .count();
-        System.out.println("Кол-во несовершеннолетних " + ageLess18);  //кол-во несовершеннолетних
+
 
 
     }
