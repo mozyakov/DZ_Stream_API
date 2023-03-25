@@ -23,36 +23,37 @@ public class Main {
         }
         System.out.println("=========");*/
         List<Person> peoplesForWork = persons.stream()
-                .filter((person) -> person.getEducation() == Education.HIGHER)
-                .filter((person) -> (person.getAge() >= 18))
-                .filter ((person) -> {
+                .filter(person -> person.getEducation() == Education.HIGHER)
+                .filter(person -> (person.getAge() >= 18))
+                .filter (person -> {
                     if(person.getSex() == Sex.MAN) {
                         return person.getAge() < 65;
-                } else if ((person.getSex() == Sex.WOMAN) && (person.getAge() < 60)) {
+                } else if (person.getSex() == Sex.WOMAN && person.getAge() < 60) {
                         return person.getAge() < 60;
                     }
                     return false;
                 })
+                //.sorted(person (p1, p2) -> p1.person.getFamily() - p2.person.getFamily());
                 //.sorted(Comporator.comparing(Person::getFamily))
-                //.sorted(Comparator.naturalOrder())
+                //.sorted(PersonComparator.naturalOrder())
                 .collect(Collectors.toList());
 
         System.out.println(peoplesForWork);
 
         System.out.println("=========");
         List<String> manForWar = persons.stream() //2 стрим подсчет призывников
-                        .filter((person) -> (person.getAge() >= 18) & (person.getAge() < 27))
-                        .filter((person) -> person.getSex() == Sex.MAN)
+                        .filter(person -> (person.getAge() >= 18) & (person.getAge() < 27))
+                        .filter(person -> person.getSex() == Sex.MAN)
                         .map(person -> person.getFamily())
                         .collect(Collectors.toList());
         System.out.println("Список фамилий призывников " + manForWar);
 
         System.out.println("=========");
 
-        long countAgeLess18 = persons.stream() //1 стрим подсчет несовершеннолетних
-                .filter((person) -> person.getAge() < 18)
+        long ageLess18 = persons.stream() //1 стрим подсчет несовершеннолетних
+                .filter(person -> person.getAge() < 18)
                 .count();
-        System.out.println("кол-во несовершеннолетних " + countAgeLess18);  //кол-во несовершеннолетних
+        System.out.println("Кол-во несовершеннолетних " + ageLess18);  //кол-во несовершеннолетних
 
 
     }
