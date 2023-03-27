@@ -14,7 +14,7 @@ public class Main {
                     Education.values()[new Random().nextInt(Education.values().length)])
             );
         }
-
+        //написать цикл for each по колелекции и второй вариант через перепоределние метода Each::
         long ageLess18 = persons.stream()   //первый стрим подсчет несовершеннолетних
                 .filter(person -> person.getAge() < 18)
                 .count();
