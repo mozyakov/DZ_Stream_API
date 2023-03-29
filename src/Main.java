@@ -5,7 +5,7 @@ public class Main {
         List<String> names = Arrays.asList("Jack", "Connor", "Harry", "George", "Samuel", "John");
         List<String> families = Arrays.asList("Evans", "Young", "Harris", "Wilson", "Davies", "Adamson", "Brown");
         Collection<Person> persons = new ArrayList<>();
-        for (int i = 0; i < 200; i++) { //кол-во объектов коллекции Person
+        for (int i = 0; i < 40; i++) { //кол-во объектов коллекции Person
             persons.add(new Person(
                     names.get(new Random().nextInt(names.size())),
                     families.get(new Random().nextInt(families.size())),
@@ -14,7 +14,11 @@ public class Main {
                     Education.values()[new Random().nextInt(Education.values().length)])
             );
         }
-        //написать цикл for each по колелекции и второй вариант через перепоределние метода Each::
+        for (Person p: persons) {   //цикл for each по всей коллекции)
+            System.out.println(p);
+        }
+        System.out.println("========="); //для удобства чтения
+        
         long ageLess18 = persons.stream()   //первый стрим подсчет несовершеннолетних
                 .filter(person -> person.getAge() < 18)
                 .count();
@@ -22,7 +26,8 @@ public class Main {
         System.out.println("========="); //для удобства чтения
 
         List<String> manForWar = persons.stream()   //второй стрим список фамилий призывников
-                .filter(person -> (person.getAge() >= 18) && (person.getAge() < 27))
+                .filter(person -> person.getAge() >= 18) //&& (person.getAge() < 27)) для упрощения перенесу вниз
+                .filter(person -> person.getAge() < 27)
                 .filter(person -> person.getSex() == Sex.MAN)
                 .map(person -> person.getFamily())
                 .collect(Collectors.toList());
@@ -42,7 +47,7 @@ public class Main {
                 })
                 .sorted(Comparator.comparing(Person::getFamily))
                 .collect(Collectors.toList());
-        System.out.println(peoplesForWork);
+        System.out.println("Список доступных для найма " + peoplesForWork);
         System.out.println("========="); //для удобства чтения
     }
 }
