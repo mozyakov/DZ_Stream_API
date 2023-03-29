@@ -5,7 +5,7 @@ public class Main {
         List<String> names = Arrays.asList("Jack", "Connor", "Harry", "George", "Samuel", "John");
         List<String> families = Arrays.asList("Evans", "Young", "Harris", "Wilson", "Davies", "Adamson", "Brown");
         Collection<Person> persons = new ArrayList<>();
-        for (int i = 0; i < 40; i++) { //кол-во объектов коллекции Person
+        for (int i = 0; i < 20; i++) { //кол-во объектов коллекции Person
             persons.add(new Person(
                     names.get(new Random().nextInt(names.size())),
                     families.get(new Random().nextInt(families.size())),
@@ -17,6 +17,8 @@ public class Main {
         for (Person p: persons) {   //цикл for each по всей коллекции)
             System.out.println(p);
         }
+        System.out.println("========="); //для удобства чтения
+        persons.forEach(System.out::println); //тоже самое что и цикл выше
         System.out.println("========="); //для удобства чтения
         
         long ageLess18 = persons.stream()   //первый стрим подсчет несовершеннолетних
