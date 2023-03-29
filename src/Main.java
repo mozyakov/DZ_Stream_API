@@ -5,7 +5,7 @@ public class Main {
         List<String> names = Arrays.asList("Jack", "Connor", "Harry", "George", "Samuel", "John");
         List<String> families = Arrays.asList("Evans", "Young", "Harris", "Wilson", "Davies", "Adamson", "Brown");
         Collection<Person> persons = new ArrayList<>();
-        for (int i = 0; i < 20; i++) { //кол-во объектов коллекции Person
+        for (int i = 0; i < 40; i++) { //кол-во объектов коллекции Person
             persons.add(new Person(
                     names.get(new Random().nextInt(names.size())),
                     families.get(new Random().nextInt(families.size())),
@@ -14,10 +14,10 @@ public class Main {
                     Education.values()[new Random().nextInt(Education.values().length)])
             );
         }
-        for (Person p: persons) {   //цикл for each по всей коллекции)
+        /*for (Person p: persons) {   //цикл for each по всей коллекции)
             System.out.println(p);
-        }
-        System.out.println("========="); //для удобства чтения
+        }*/
+        //System.out.println("========="); //для удобства чтения
         persons.forEach(System.out::println); //тоже самое что и цикл выше
         System.out.println("========="); //для удобства чтения
         
@@ -31,7 +31,9 @@ public class Main {
                 .filter(person -> person.getAge() >= 18) //&& (person.getAge() < 27)) для упрощения перенесу вниз
                 .filter(person -> person.getAge() < 27)
                 .filter(person -> person.getSex() == Sex.MAN)
+                //.filter(Person::isgetSex(MAN)) //в классе Person надо написать метод
                 .map(person -> person.getFamily())
+                //.map(Person::getFamily)
                 .collect(Collectors.toList());
         System.out.println("Список фамилий призывников " + manForWar);
         System.out.println("========="); //для удобства чтения
