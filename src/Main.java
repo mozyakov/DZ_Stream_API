@@ -39,17 +39,20 @@ public class Main {
         List<Person> peoplesForWork = persons.stream()   //третий стрим способные к работе отсортированный по фамилиям
                 .filter(person -> person.getEducation() == Education.HIGHER)
                 .filter(person -> (person.getAge() >= 18))
-                .filter (person -> {
+                /*.filter (person -> {  //фильтр через цикл foreach
                     if(person.getSex() == Sex.MAN) {
                         return person.getAge() < 65;
                 } else if (person.getSex() == Sex.WOMAN && person.getAge() < 60) {
                         return person.getAge() < 60;
                     }
                     return false;
-                })
+                })*/
+                .filter(person -> person.getSex() == Sex.MAN && person.getAge() < 65 //фильтр с упрощенной логикой
+                        || person.getSex() == Sex.WOMAN && person.getAge() < 60)
                 .sorted(Comparator.comparing(Person::getFamily))
                 .collect(Collectors.toList());
-        System.out.println("Список доступных для найма " + peoplesForWork);
+        //System.out.println("Список доступных для найма " + peoplesForWork); //ниже вывод через цикл
+        peoplesForWork.forEach(System.out::println);
         System.out.println("========="); //для удобства чтения
     }
 }
